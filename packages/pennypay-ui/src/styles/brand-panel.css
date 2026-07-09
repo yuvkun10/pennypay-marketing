@@ -1,0 +1,287 @@
+/* PennyPay shared public/login surfaces. Built on the Astryx Neutral tokens
+   extracted from the current H&C portal. This is routing UI only, not auth. */
+
+.pp-login-entry {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 1.05fr);
+  background: var(--color-background-body);
+  color: var(--color-text-primary);
+}
+
+.pp-login-brand-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--spacing-10);
+  padding: 44px;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.pp-login-brand-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  opacity: 0.08;
+  background-image:
+    linear-gradient(color-mix(in oklch, var(--color-on-accent) 16%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--color-on-accent) 16%, transparent) 1px, transparent 1px);
+  background-size: 36px 36px;
+  -webkit-mask-image: radial-gradient(circle at 45% 38%, black, transparent 74%);
+  mask-image: radial-gradient(circle at 45% 38%, black, transparent 74%);
+}
+
+.pp-login-brand-panel::after {
+  content: '';
+  position: absolute;
+  inset: -28% -14% auto -14%;
+  z-index: -1;
+  height: 150%;
+  opacity: 0.4;
+  filter: blur(8px);
+  background:
+    radial-gradient(34% 42% at 24% 28%, color-mix(in oklch, var(--color-on-accent) 18%, transparent), transparent 72%),
+    radial-gradient(32% 38% at 78% 22%, color-mix(in oklch, var(--color-success-solid) 32%, transparent), transparent 72%),
+    radial-gradient(34% 42% at 60% 78%, color-mix(in oklch, var(--color-info-solid) 22%, transparent), transparent 74%);
+}
+
+.pp-login-brand-kicker {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.pp-login-brand-kicker .brand-mark {
+  width: 38px;
+  height: 38px;
+}
+
+.pp-login-brand-name {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.pp-login-brand-name b {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.pp-login-brand-name span {
+  margin-top: 3px;
+  color: color-mix(in oklch, var(--color-on-accent) 58%, transparent);
+  font-size: 11px;
+}
+
+.pp-login-brand-copy {
+  max-width: 480px;
+}
+
+.pp-login-brand-copy h1 {
+  margin: 0;
+  color: var(--color-on-accent);
+  font-size: clamp(32px, 5vw, 44px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+.pp-login-brand-copy p {
+  max-width: 48ch;
+  margin-top: 16px;
+  color: color-mix(in oklch, var(--color-on-accent) 66%, transparent);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.pp-login-brand-foot {
+  color: color-mix(in oklch, var(--color-on-accent) 48%, transparent);
+  font-size: 11px;
+}
+
+.pp-login-form-panel {
+  display: grid;
+  place-content: center;
+  padding: 40px;
+  background: var(--color-background-body);
+}
+
+.pp-login-form-shell {
+  width: min(420px, calc(100vw - 40px));
+}
+
+.pp-login-mobile-brand {
+  display: none;
+  margin-bottom: 22px;
+}
+
+.pp-workspace-switcher {
+  display: grid;
+  gap: 10px;
+}
+
+.pp-workspace-card {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-container);
+  background: var(--color-background-card);
+  color: var(--color-text-primary);
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  transition:
+    background var(--dur-fast) var(--ease-soft),
+    border-color var(--dur-fast) var(--ease-soft),
+    box-shadow var(--dur-fast) var(--ease-soft),
+    transform var(--dur-press) var(--ease-out);
+}
+
+.pp-workspace-card:hover:not(:disabled) {
+  background: var(--color-accent-muted);
+  border-color: var(--color-border-emphasized);
+}
+
+.pp-workspace-card:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.pp-workspace-card:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-background-body), 0 0 0 4px color-mix(in oklch, var(--color-accent) 55%, transparent);
+}
+
+.pp-workspace-card[aria-pressed='true'] {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent), var(--shadow-xs);
+}
+
+.pp-workspace-card:disabled {
+  opacity: 0.56;
+  cursor: not-allowed;
+}
+
+.pp-workspace-card__mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-content: center;
+  flex: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-element);
+  background: var(--color-background-muted);
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pp-workspace-card[aria-pressed='true'] .pp-workspace-card__mark {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border-color: var(--color-accent);
+}
+
+.pp-workspace-card__body {
+  min-width: 0;
+  flex: 1;
+}
+
+.pp-workspace-card__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pp-workspace-card__description,
+.pp-workspace-card__hint {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.pp-workspace-card__hint {
+  font-family: var(--font-family-body);
+}
+
+.pp-workspace-card__status {
+  flex: none;
+}
+
+.pp-login-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.pp-btn-spinner {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 999px;
+  animation: pp-btn-spin 0.75s linear infinite;
+}
+
+@keyframes pp-btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pp-login-brand-panel::after {
+    animation: pp-brand-aurora 22s var(--ease-in-out) infinite alternate;
+    will-change: transform;
+  }
+
+  @keyframes pp-brand-aurora {
+    from {
+      transform: translate3d(-2%, -1%, 0) scale(1.03);
+    }
+    to {
+      transform: translate3d(3%, 3%, 0) scale(1.12);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pp-btn-spinner,
+  .pp-login-brand-panel::after {
+    animation: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .pp-login-entry {
+    grid-template-columns: 1fr;
+  }
+
+  .pp-login-brand-panel {
+    display: none;
+  }
+
+  .pp-login-form-panel {
+    min-height: 100svh;
+    place-content: start center;
+    padding: 48px 20px 32px;
+  }
+
+  .pp-login-mobile-brand {
+    display: flex;
+  }
+}

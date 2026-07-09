@@ -1,0 +1,406 @@
+/* ============================================================
+   Hazel & Coastal — Token Layer · Astryx "Neutral"
+   ------------------------------------------------------------
+   Migrated to the Astryx design system (yuvkun10/astryx →
+   @astryxdesign/theme-neutral). Values are lifted verbatim from
+   the theme source: a pure grayscale spine, near-black accent,
+   and an OKLCH-derived categorical status palette.
+
+   Astryx authors tokens with StyleX + light-dark(); this file
+   is the plain-CSS equivalent for the static mockups:
+     Light = :root (default)   Dark = .dark
+   The .dark class + localStorage('hc-theme') toggle is retained.
+
+   Contract: Astryx --color-* / --radius-* / --spacing-* /
+   --font-* names are the single source of truth. Legacy shadcn
+   aliases are shimmed at the bottom for backward compatibility.
+   ============================================================ */
+
+/* Fonts are self-hosted: Figtree + JetBrains Mono @font-face live in globals.css (CSP font-src 'self'). */
+
+/* ---------------------------------------------------------------
+   1 · ASTRYX NEUTRAL COLOR TOKENS
+   Light = :root · Dark = .dark
+   --------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  /* Core semantic */
+  --color-accent: #262626;
+  --color-accent-muted: #f1f1f1;
+  --color-on-accent: #ffffff;
+  --color-neutral: #0000000F;
+  --color-background-surface: #ffffff;
+  --color-background-body: #f1f1f1;
+  --color-background-card: #ffffff;
+  --color-background-popover: #ffffff;
+  --color-background-muted: #f1f1f1;
+  --color-background-inverted: #171717;
+  --color-overlay: #00000080;
+  --color-overlay-hover: #0000000D;
+  --color-overlay-pressed: #0000001A;
+
+  /* Text */
+  --color-text-primary: #171717;
+  --color-text-secondary: #737373;
+  --color-text-disabled: #a3a3a3;
+  --color-text-accent: #262626;
+  --color-on-dark: #ffffff;
+  --color-on-light: #171717;
+
+  /* Icon */
+  --color-icon-accent: #262626;
+  --color-icon-primary: #171717;
+  --color-icon-secondary: #737373;
+  --color-icon-disabled: #a3a3a3;
+
+  /* Status / sentiment — "colored stop" (text/icon on tinted surface) */
+  --color-success: #007004;
+  --color-success-muted: #c5e5c0;
+  --color-on-success: #ffffff;
+  --color-error: #a50c25;
+  --color-error-muted: #facecb;
+  --color-on-error: #ffffff;
+  --color-warning: #745b00;
+  --color-warning-muted: #f8da9d;
+  --color-on-warning: #171717;
+
+  /* Filled semantic — vivid saturated stops (badge / progress fills) */
+  --color-success-solid: #198100;
+  --color-error-solid: #e33f4a;
+  --color-warning-solid: #ffce2f;
+  --color-info-solid: #0074e2;
+  --color-on-info: #ffffff;
+
+  /* Border */
+  --color-border: #ebebeb;
+  --color-border-emphasized: #d4d4d4;
+
+  /* Effects */
+  --color-skeleton: #ebebeb;
+  --color-track: #d4d4d4;
+  --color-shadow: #0000001A;
+  --color-tint-hover: black;
+
+  /* Categorical — pastel bg / pastel border / dark icon / dark text */
+  --color-background-red: #facecb;    --color-border-red: #e6bab8;    --color-icon-red: #89001a;    --color-text-red: #89001a;
+  --color-background-orange: #fad0b5; --color-border-orange: #e6bda2; --color-icon-orange: #6e3500; --color-text-orange: #6e3500;
+  --color-background-yellow: #f8da9d; --color-border-yellow: #e4c279; --color-icon-yellow: #584400; --color-text-yellow: #584400;
+  --color-background-green: #c5e5c0;  --color-border-green: #b2d1ac;  --color-icon-green: #0c5700;  --color-text-green: #0c5700;
+  --color-background-teal: #a5e3d6;   --color-border-teal: #94d6c8;   --color-icon-teal: #005348;   --color-text-teal: #005348;
+  --color-background-cyan: #a3e0ef;   --color-border-cyan: #91d3e3;   --color-icon-cyan: #00505f;   --color-text-cyan: #00505f;
+  --color-background-blue: #c4ddfb;   --color-border-blue: #b1c9e7;   --color-icon-blue: #00458c;   --color-text-blue: #00458c;
+  --color-background-purple: #eccef3; --color-border-purple: #d8bbdf; --color-icon-purple: #700084; --color-text-purple: #700084;
+  --color-background-pink: #fccadc;   --color-border-pink: #e7b7c8;   --color-icon-pink: #83004b;   --color-text-pink: #83004b;
+  --color-background-gray: #e5e5e5;   --color-border-gray: #d4d4d4;   --color-icon-gray: #525252;   --color-text-gray: #262626;
+
+  /* Saturated categorical solids (dots / charts) */
+  --color-purple-solid: #980fb2;
+  --color-teal-solid: #0c7365;
+  --color-pink-solid: #b10e69;
+
+  /* Data-viz — Ember-neutral categorical scale. chart-5 deepened from the
+     bundle's #0c7365: it fell below the OKLCH chroma floor (read as gray);
+     validated with the dataviz six-checks script against #ffffff. */
+  --chart-1: #0074e2;
+  --chart-2: #358a3a;
+  --chart-3: #980fb2;
+  --chart-4: #d57113;
+  --chart-5: #008572;
+
+  /* App-shell surfaces (extension — Astryx has no sidebar tokens) */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #171717;
+  --sidebar-primary: #262626;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f1f1;
+  --sidebar-accent-foreground: #171717;
+  --sidebar-border: #ebebeb;
+  --sidebar-ring: #262626;
+
+  /* ---- Radius (Astryx Neutral) ---- */
+  --radius-none: 0.25rem;
+  --radius-inner: 0.375rem;
+  --radius-element: 0.625rem;   /* 10px — buttons, inputs, chips */
+  --radius-container: 0.75rem;  /* 12px — cards, panels */
+  --radius-page: 1.75rem;
+  --radius-full: 9999px;
+
+  /* ---- Spacing (Astryx core scale) ---- */
+  --spacing-0: 0px;   --spacing-0-5: 2px; --spacing-1: 4px;  --spacing-1-5: 6px;
+  --spacing-2: 8px;   --spacing-3: 12px;  --spacing-4: 16px; --spacing-5: 20px;
+  --spacing-6: 24px;  --spacing-7: 28px;  --spacing-8: 32px; --spacing-9: 36px;
+  --spacing-10: 40px; --spacing-11: 44px; --spacing-12: 48px;
+
+  /* ---- Element sizes ---- */
+  --size-element-sm: 28px;
+  --size-element-md: 32px;
+  --size-element-lg: 36px;
+
+  /* ---- Typography (Astryx Neutral: Figtree body+heading, system mono) ---- */
+  --font-family-body: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-family-heading: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-family-code: 'JetBrains Mono', ui-monospace, 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  --font-size-4xs: 0.375rem;  --font-size-3xs: 0.4375rem; --font-size-2xs: 0.5rem;
+  --font-size-xs: 0.625rem;   --font-size-sm: 0.75rem;    --font-size-base: 0.875rem;
+  --font-size-lg: 1.0625rem;  --font-size-xl: 1.25rem;    --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.8125rem; --font-size-4xl: 2.1875rem; --font-size-5xl: 2.625rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ---- Motion (Astryx standard easing + duration bands) ---- */
+  --ease-standard: cubic-bezier(0.24, 1, 0.4, 1);
+  --ease-out: cubic-bezier(0.24, 1, 0.4, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 175ms;
+  --duration-medium: 410ms;
+  --duration-slow: 975ms;
+  --dur-press: 130ms;
+  --dur-fast: 160ms;
+  --dur-pop: 210ms;
+  --dur-panel: 300ms;
+
+  /* ---- Elevation (Astryx soft drops; dark adds a rim inset below) ---- */
+  --shadow-low: 0 2px 4px oklch(0 0 0 / 5%), 0 4px 8px oklch(0 0 0 / 10%);
+  --shadow-med: 0 2px 4px oklch(0 0 0 / 5%), 0 4px 12px oklch(0 0 0 / 10%);
+  --shadow-high: 0 4px 6px oklch(0 0 0 / 10%), 0 12px 24px oklch(0 0 0 / 15%);
+  /* legacy 5-step aliases retained for the mockup layer */
+  --shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 4%);
+  --shadow-sm: var(--shadow-low);
+  --shadow-md: var(--shadow-med);
+  --shadow-lg: var(--shadow-high);
+  --shadow-pop: 0 8px 18px -6px oklch(0 0 0 / 12%), 0 24px 56px -12px oklch(0 0 0 / 18%);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --color-accent: #ebebeb;
+  --color-accent-muted: #262626;
+  --color-on-accent: #171717;
+  --color-neutral: #FFFFFF1A;
+  --color-background-surface: #262626;
+  --color-background-body: #1b1b1b;
+  --color-background-card: #1b1b1b;
+  --color-background-popover: #1b1b1b;
+  --color-background-muted: #1b1b1b;
+  --color-background-inverted: #fafafa;
+  --color-overlay: #000000CC;
+  --color-overlay-hover: #FFFFFF0D;
+  --color-overlay-pressed: #FFFFFF1A;
+
+  --color-text-primary: #fafafa;
+  --color-text-secondary: #a3a3a3;
+  --color-text-disabled: #525252;
+  --color-text-accent: #ebebeb;
+  --color-on-dark: #ffffff;
+  --color-on-light: #171717;
+
+  --color-icon-accent: #ebebeb;
+  --color-icon-primary: #fafafa;
+  --color-icon-secondary: #a3a3a3;
+  --color-icon-disabled: #525252;
+
+  --color-success: #9fe59b;
+  --color-success-muted: #84c9803D;
+  --color-on-success: #171717;
+  --color-error: #ffc6c1;
+  --color-error-muted: #ff9e973D;
+  --color-on-error: #171717;
+  --color-warning: #fdcf4f;
+  --color-warning-muted: #deb4333D;
+  --color-on-warning: #171717;
+
+  --color-success-solid: #64af4c;
+  --color-error-solid: #ff705d;
+  --color-warning-solid: #ffce2f;
+  --color-info-solid: #6d9cfe;
+  --color-on-info: #171717;
+
+  --color-border: #FFFFFF1A;
+  --color-border-emphasized: #525252;
+
+  --color-skeleton: #525252;
+  --color-track: #525252;
+  --color-shadow: #0000004D;
+  --color-tint-hover: white;
+
+  --color-background-red: #ff9e973D;    --color-border-red: #ff6f6c;    --color-icon-red: #ff9e97;    --color-text-red: #ffc6c1;
+  --color-background-orange: #ffa2583D; --color-border-orange: #e2883e; --color-icon-orange: #ffa258; --color-text-orange: #ffc9a2;
+  --color-background-yellow: #deb4333D; --color-border-yellow: #c0990e; --color-icon-yellow: #deb433; --color-text-yellow: #fdcf4f;
+  --color-background-green: #84c9803D;  --color-border-green: #69ad67;  --color-icon-green: #84c980;  --color-text-green: #9fe59b;
+  --color-background-teal: #7ec6b83D;   --color-border-teal: #63ab9d;   --color-icon-teal: #7ec6b8;   --color-text-teal: #99e2d3;
+  --color-background-cyan: #83c2d43D;   --color-border-cyan: #67a7b8;   --color-icon-cyan: #83c2d4;   --color-text-cyan: #9edef0;
+  --color-background-blue: #9eb7ff3D;   --color-border-blue: #6d9cfe;   --color-icon-blue: #9eb7ff;   --color-text-blue: #c7d3ff;
+  --color-background-purple: #f297ff3D; --color-border-purple: #dd74f0; --color-icon-purple: #f297ff; --color-text-purple: #fac1ff;
+  --color-background-pink: #ff99c33D;   --color-border-pink: #f273aa;   --color-icon-pink: #ff99c3;   --color-text-pink: #ffc3da;
+  --color-background-gray: var(--color-neutral); --color-border-gray: #262626; --color-icon-gray: #a3a3a3; --color-text-gray: #e5e5e5;
+
+  --color-purple-solid: #c98bff;
+  --color-teal-solid: #5ec9bb;
+  --color-pink-solid: #f273aa;
+
+  /* Dark data-viz set re-derived: the bundle's values sat above the dark
+     OKLCH lightness band (0.48-0.67) and its teal below the chroma floor;
+     this set passes all six checks against #1b1b1b. */
+  --chart-1: #3f82f0;
+  --chart-2: #2f9e44;
+  --chart-3: #c04ede;
+  --chart-4: #cd7015;
+  --chart-5: #1c9c88;
+
+  --sidebar: #161616;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary: #ebebeb;
+  --sidebar-primary-foreground: #171717;
+  --sidebar-accent: #262626;
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: #FFFFFF14;
+  --sidebar-ring: #ebebeb;
+
+  /* Dark elevation: deeper drops + a Figma-style all-around 1px white rim inset */
+  --shadow-low: 0 2px 4px oklch(0 0 0 / 25%), 0 4px 8px oklch(0 0 0 / 40%), inset 0 0 0 1px oklch(1 0 0 / 8%);
+  --shadow-med: 0 2px 4px oklch(0 0 0 / 35%), 0 4px 12px oklch(0 0 0 / 50%), inset 0 0 0 1px oklch(1 0 0 / 12%);
+  --shadow-high: 0 4px 6px oklch(0 0 0 / 50%), 0 12px 24px oklch(0 0 0 / 70%), inset 0 0 0 1px oklch(1 0 0 / 15%);
+  --shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 30%);
+  --shadow-sm: var(--shadow-low);
+  --shadow-md: var(--shadow-med);
+  --shadow-lg: var(--shadow-high);
+  --shadow-pop: 0 8px 18px -6px oklch(0 0 0 / 50%), 0 24px 56px -12px oklch(0 0 0 / 60%);
+}
+
+/* ---------------------------------------------------------------
+   2 · LEGACY shadcn ALIASES — deprecated compatibility shims.
+   Everything below points at an Astryx --color-* token so any
+   un-migrated reference still resolves (never falls back to a
+   browser default). Remove once all screens are confirmed clean.
+   --------------------------------------------------------------- */
+:root, .dark {
+  --background: var(--color-background-body);
+  --foreground: var(--color-text-primary);
+  --card: var(--color-background-card);
+  --card-foreground: var(--color-text-primary);
+  --popover: var(--color-background-popover);
+  --popover-foreground: var(--color-text-primary);
+  --primary: var(--color-accent);
+  --primary-foreground: var(--color-on-accent);
+  --secondary: var(--color-background-muted);
+  --secondary-foreground: var(--color-text-primary);
+  --muted: var(--color-background-muted);
+  --muted-foreground: var(--color-text-secondary);
+  --accent: var(--color-accent-muted);
+  --accent-foreground: var(--color-text-primary);
+  --destructive: var(--color-error-solid);
+  --destructive-foreground: var(--color-on-error);
+  --destructive-muted: var(--color-background-red);
+  --destructive-muted-foreground: var(--color-text-red);
+  --destructive-border: var(--color-border-red);
+  --border: var(--color-border);
+  --input: var(--color-border-emphasized);
+  --ring: var(--color-accent);
+  --radius: var(--radius-element);
+  --font-sans: var(--font-family-body);
+  --font-mono: var(--font-family-code);
+
+  --success: var(--color-success-solid);
+  --success-foreground: var(--color-on-success);
+  --success-muted: var(--color-background-green);
+  --success-muted-foreground: var(--color-text-green);
+  --success-border: var(--color-border-green);
+  --warning: var(--color-warning-solid);
+  --warning-foreground: var(--color-on-warning);
+  --warning-muted: var(--color-background-yellow);
+  --warning-muted-foreground: var(--color-text-yellow);
+  --warning-border: var(--color-border-yellow);
+  --info: var(--color-info-solid);
+  --info-foreground: var(--color-on-info);
+  --info-muted: var(--color-background-blue);
+  --info-muted-foreground: var(--color-text-blue);
+  --info-border: var(--color-border-blue);
+  --violet: var(--color-purple-solid);
+  --violet-foreground: var(--color-on-dark);
+  --violet-muted: var(--color-background-purple);
+  --violet-muted-foreground: var(--color-text-purple);
+  --violet-border: var(--color-border-purple);
+  --teal: var(--color-teal-solid);
+  --teal-foreground: var(--color-on-dark);
+  --teal-muted: var(--color-background-teal);
+  --teal-muted-foreground: var(--color-text-teal);
+  --teal-border: var(--color-border-teal);
+  --pink: var(--color-pink-solid);
+  --pink-foreground: var(--color-on-dark);
+  --pink-muted: var(--color-background-pink);
+  --pink-muted-foreground: var(--color-text-pink);
+  --pink-border: var(--color-border-pink);
+}
+
+/* ---------------------------------------------------------------
+   3 · BASE / RESET — kept in @layer base so element-level defaults
+   (a { color: inherit }, body typography) never beat Tailwind's
+   layered utilities on styled components (e.g. text-primary-foreground
+   on a Link rendered through Button asChild).
+   --------------------------------------------------------------- */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: var(--font-family-body);
+    background: var(--color-background-body);
+    color: var(--color-text-primary);
+    font-size: var(--font-size-base);
+    line-height: 1.4286;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 { font-family: var(--font-family-heading); font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; color: var(--color-text-primary); }
+
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; }
+  input, select, textarea { font-family: inherit; font-size: inherit; }
+
+  ::selection { background: color-mix(in oklch, var(--color-accent) 20%, transparent); color: var(--color-text-primary); }
+
+  /* Scrollbar */
+  * { scrollbar-width: thin; scrollbar-color: var(--color-border-emphasized) transparent; }
+  *::-webkit-scrollbar { width: 10px; height: 10px; }
+  *::-webkit-scrollbar-thumb { background: var(--color-border-emphasized); border-radius: 999px; border: 3px solid transparent; background-clip: content-box; }
+  *::-webkit-scrollbar-thumb:hover { background: var(--color-text-secondary); background-clip: content-box; }
+}
+
+.tnum { font-variant-numeric: tabular-nums; }
+.mono { font-family: var(--font-family-code); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+
+/* ---------------------------------------------------------------
+   4 · TYPE SCALE (Astryx geometric scale · base 14 · ratio 1.2)
+   --------------------------------------------------------------- */
+.t-display { font-size: var(--font-size-3xl); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; }
+.t-h1 { font-size: var(--font-size-2xl); font-weight: 600; letter-spacing: -0.015em; line-height: 1.3333; }
+.t-h2 { font-size: var(--font-size-xl); font-weight: 600; letter-spacing: -0.012em; line-height: 1.4; }
+.t-h3 { font-size: var(--font-size-lg); font-weight: 600; letter-spacing: -0.008em; line-height: 1.4118; }
+.t-body { font-size: var(--font-size-base); font-weight: 400; }
+.t-sm { font-size: var(--font-size-sm); font-weight: 400; }
+.t-xs { font-size: var(--font-size-xs); font-weight: 400; }
+.t-label { font-size: var(--font-size-sm); font-weight: 500; color: var(--color-text-secondary); }
+.t-label-mono { font-family: var(--font-family-code); font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-text-secondary); }
+.t-muted { color: var(--color-text-secondary); }
+
+/* ---------------------------------------------------------------
+   5 · MOTION BASE — honor reduced motion
+   --------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
