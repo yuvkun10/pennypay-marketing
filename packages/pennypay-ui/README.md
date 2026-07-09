@@ -31,7 +31,7 @@ const workspaces: Workspace[] = [
     label: 'Dulcie Home Care',
     shortLabel: 'Dulcie',
     description: 'Dulcie invoice operations workspace.',
-    loginUrl: 'https://dulcie.dulciepay.com.au/login',
+    loginUrl: 'https://dulciehomecare.dulciepay.com.au/login',
     googleWorkspaceHint: 'Use your Dulcie Google Workspace account if using Google sign-in.',
   },
 ]
