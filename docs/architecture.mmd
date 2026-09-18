@@ -1,0 +1,12 @@
+flowchart TD
+    visitor["Visitor browser"] --> vercel["Vercel static hosting (vercel.json rewrites)"]
+    vercel --> spa["React SPA (src/main.tsx, src/App.tsx)"]
+    spa --> home["HomePage /"]
+    spa --> security["SecurityPage /security"]
+    spa --> contact["ContactPage /contact"]
+    spa --> login["LoginPage /login"]
+    login --> selector["WorkspaceLoginSelector"]
+    selector --> config["src/config/workspaces.ts"]
+    selector --> storage["localStorage: last workspace id only"]
+    config --> native["Redirect to the workspace's own login screen"]
+    ui["packages/pennypay-ui (@pennypay/ui)"] --> spa
