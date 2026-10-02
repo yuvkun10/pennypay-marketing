@@ -71,7 +71,7 @@ Vitest runs `src/config/workspaces.test.ts`. It checks that each workspace resol
 - [Configuration](docs/configuration.md)
 - [Deployment](docs/deployment.md)
 - [Design system package notes](packages/pennypay-ui/README.md)
-- [Previous README (full detail)](docs/archive/README-2026-09-18.md)
+- [Previous README (full detail)](https://github.com/yuvkun10/pennypay-marketing/blob/b65f891d1b543be002d08d2d271a03dc3891fcf7/docs/archive/README-2026-09-18.md)
 
 ## License
 
